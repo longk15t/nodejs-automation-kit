@@ -1,0 +1,38 @@
+name: Mobile WebdriverIO Tests (BrowserStack)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mobile-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: |
+          pnpm install
+          pnpm install --prefix mobile-wdio
+
+      # OPTIONAL — Upload app (.apk/.ipa) to BrowserStack App Automate
+      # If your app is already uploaded manually, remove this step
+      - name: Upload app to BrowserStack
+        id: upload-app
+        run: |
+          APP_PATH="mobile-wdio/app/app-release.apk"
+          UPLOAD_URL="https://api-cloud.browserstack.com/app-automate/upload"
+
+          RESPONSE=$(curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_KEY" \
+            -X
