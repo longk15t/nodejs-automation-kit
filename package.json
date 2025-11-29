@@ -1,0 +1,17 @@
+{
+  "name": "nodejs-automation-kit",
+  "version": "1.0.0",
+  "description": "This is the kit for all automation test frameworks using Nodejs libraries",
+  "main": "index.js",
+  "scripts": {
+    "test:web": "pnpm --filter web-playwright test",
+    "test:api": "pnpm --filter api-supertest test",
+    "test:mobile": "pnpm --filter mobile-wdio wdio"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
