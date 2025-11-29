@@ -5,8 +5,8 @@ test("Authenticated request", async ({ request }) => {
 
   const response = await request.get("/profile", {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 
   expect(response.status()).toBe(200);

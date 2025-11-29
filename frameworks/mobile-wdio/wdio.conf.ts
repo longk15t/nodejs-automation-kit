@@ -6,13 +6,15 @@ export const config = {
   services: ["appium"],
   appium: { args: { relaxedSecurity: true } },
 
-  capabilities: [{
-    platformName: "Android",
-    "appium:deviceName": "Android Emulator",
-    "appium:platformVersion": "12.0",
-    "appium:automationName": "UiAutomator2",
-    "appium:app": "/path/to/app.apk"
-  }],
+  capabilities: [
+    {
+      platformName: "Android",
+      "appium:deviceName": "Android Emulator",
+      "appium:platformVersion": "12.0",
+      "appium:automationName": "UiAutomator2",
+      "appium:app": "/path/to/app.apk",
+    },
+  ],
 
-  mochaOpts: { ui: "bdd", timeout: 60000 }
+  mochaOpts: { ui: "bdd", timeout: 60000 },
 };

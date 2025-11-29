@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test("POST /users → create user", async ({ request }) => {
   const payload = {
     name: "John Doe",
-    email: "john@example.com"
+    email: "john@example.com",
   };
 
   const response = await request.post("/users", { data: payload });

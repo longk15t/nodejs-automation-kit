@@ -3,8 +3,5 @@
   "compilerOptions": {
     "types": ["@wdio/mocha-framework", "node", "@wdio/globals/types", "@wdio/appium-service"]
   },
-  "include": [
-    "tests/**/*",
-    "wdio.conf.ts"
-  ]
+  "include": ["tests/**/*", "wdio.conf.ts"]
 }
