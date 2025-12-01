@@ -1,10 +1,10 @@
 import { test as base } from '@playwright/test';
-import { UserApi } from '../../frameworks/api-playwright/requests/user-api';
+import { PetApi } from '../../frameworks/api-playwright/requests/pet-api';
 
 export const test = base.extend<{
-  userApi: UserApi;
+  petApi: PetApi;
 }>({
-  userApi: async ({ request }, use) => {
-    await use(new UserApi(request));
+  petApi: async ({ request }, use) => {
+    await use(new PetApi(request));
   },
 });
