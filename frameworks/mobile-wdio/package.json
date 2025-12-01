@@ -2,7 +2,7 @@
   "name": "mobile-wdio",
   "version": "1.0.0",
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.ts"
+    "wdio": "npx wdio run ./wdio.conf.ts"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

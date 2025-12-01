@@ -6,9 +6,9 @@
   "scripts": {
     "lint": "eslint . --ext .ts --fix",
     "format": "prettier --write .",
-    "test:web": "pnpm --filter web-playwright test",
-    "test:api": "pnpm --filter api-supertest test",
-    "test:mobile": "pnpm --filter mobile-wdio wdio"
+    "test:web": "npm --prefix frameworks/web-playwright run test",
+    "test:api": "npm --prefix frameworks/api-playwright run test",
+    "test:mobile": "npm --prefix frameworks/mobile-wdio run test"
   },
   "keywords": [],
   "author": "",
