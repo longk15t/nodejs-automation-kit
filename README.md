@@ -39,8 +39,11 @@ automation-monorepo/
 
 - Located in: `frameworks/web-playwright/`
 - Uses Playwright Test Runner
-- Supports multiple browsers (Chromium, Firefox, WebKit)
-- Includes basic sample spec
+- Supports browser and mobile viewport (Chrome, Google Pixel 7 and iPhone 13)
+- Functional tests
+- CMS content tests
+- Test tagging
+- Visual testing (full page/section)
 
 Run tests:
 

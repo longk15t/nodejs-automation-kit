@@ -1,6 +1,7 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './base-page';
 import { env } from '@shared/config/env';
+import { logger } from '@shared/utils/logger';
 
 export class WellnessPlanPage extends BasePage {
   readonly joinPlanButton: Locator;
@@ -13,7 +14,7 @@ export class WellnessPlanPage extends BasePage {
   }
 
   async goToWellnessPlanPage(): Promise<void> {
+    logger.info('Navigate to Wellness Plan page');
     await this.navigateTo(`${env.baseUrl}/wellness-plan`);
-    
   }
 }

@@ -16,11 +16,15 @@ export class BasePage {
     return await this.page.title();
   }
 
-  async waitForPageLoad(): Promise<void> {
-    await this.page.waitForLoadState('domcontentloaded');
+  async waitForPageLoad(state?: 'domcontentloaded'): Promise<void> {
+    await this.page.waitForLoadState(state);
   }
 
   getLocatorByText(text: string): Locator {
     return this.page.getByText(text, { exact: true });
+  }
+
+  async setViewPort(w: number, h: number): Promise<void> {
+    await this.page.setViewportSize({width: w, height: h});
   }
 }
