@@ -1,7 +1,25 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "types": ["@wdio/mocha-framework", "node", "@wdio/globals/types", "@wdio/appium-service"]
+    "target": "esnext",
+    "types": ["node", "@wdio/globals/types", "@wdio/mocha-framework"],
+    // Other Outputs
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Recommended Options
+    "strict": true,
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": false,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
   },
-  "include": ["tests/**/*", "wdio.conf.ts"]
+  "include": ["tests/**/*", "wdio.conf.ts", "screens/base-page.ts"]
 }
