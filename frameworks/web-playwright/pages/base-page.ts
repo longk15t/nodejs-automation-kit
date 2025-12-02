@@ -1,6 +1,4 @@
-import { Page, Locator } from '@playwright/test';
-import { env } from '@shared/config/env';
-import { logger } from "@shared/utils/logger";
+import { Page, Locator } from '@shared/fixtures/fixture';
 
 export class BasePage {
   readonly page: Page;
@@ -11,8 +9,7 @@ export class BasePage {
 
   async navigateTo(url: string): Promise<void> {
     await this.page.goto(url);
-    await this.page.evaluate(() => localStorage.clear());
-    await this.page.reload();
+    await this.waitForPageLoad();
   }
 
   async getTitle(): Promise<string> {

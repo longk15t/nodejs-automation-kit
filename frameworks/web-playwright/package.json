@@ -2,6 +2,8 @@
   "name": "web-playwright",
   "version": "1.0.0",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test --project=chrome",
+    "test:android": "npx playwright test --project=android",
+    "test:ios": "npx playwright test --project=ios"
   }
 }
