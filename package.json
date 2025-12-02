@@ -8,7 +8,7 @@
     "format": "prettier --write .",
     "test:web": "npm --prefix frameworks/web-playwright run test",
     "test:web:android": "npm --prefix frameworks/web-playwright run test:android",
-    "test:web:ios": "npm --prefix frameworks/web-playwright run test:ios",
+    "test:web:ios": "npm --prefix frameworks/web-playwright run test:ios", 
     "test:api": "npm --prefix frameworks/api-playwright run test",
     "test:mobile": "npm --prefix frameworks/mobile-wdio run test"
   },

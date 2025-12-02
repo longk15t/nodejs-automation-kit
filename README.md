@@ -44,11 +44,12 @@ automation-monorepo/
 - CMS content tests
 - Test tagging
 - Visual testing (full page/section)
+- HTML report including trace/screenshot for failure
 
 Run tests:
 
 ```sh
-pnpm test:web
+npm run test:web
 ```
 
 ---
@@ -63,7 +64,7 @@ pnpm test:web
 Run tests:
 
 ```sh
-pnpm test:api
+npm run test:api
 ```
 
 ---
@@ -78,7 +79,7 @@ pnpm test:api
 Run tests:
 
 ```sh
-pnpm test:mobile
+npm run test:mobile
 ```
 
 ---
@@ -88,10 +89,22 @@ pnpm test:mobile
 ### 1. Install dependencies (root + all workspaces):
 
 ```sh
-pnpm install
+npm install
+npm install --prefix frameworks/web-playwright
+npm install --prefix frameworks/api-playwright
+npm install --prefix frameworks/mobile-wdio
 ```
 
-(You may use `yarn` or `npm` workspaces as well.)
+Install Playwright dependencies
+```sh
+cd frameworks/web-playwright
+npx playwright install
+```
+
+```sh
+cd frameworks/api-playwright
+npx playwright install
+```
 
 ---
 
@@ -100,19 +113,21 @@ pnpm install
 ### Run Web UI (Playwright)
 
 ```sh
-pnpm test:web
+npm run test:web
+npm run test:web:android
+npm run test:web:ios
 ```
 
 ### Run API Tests (Playwright)
 
 ```sh
-pnpm test:api
+npm test:api
 ```
 
 ### Run Mobile Tests (WebdriverIO + Appium)
 
 ```sh
-pnpm test:mobile
+npm test:mobile
 ```
 
 ---
