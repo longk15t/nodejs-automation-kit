@@ -1,14 +1,12 @@
 import { test, expect } from '@shared/fixtures/fixture';
-import { GET_PRODUCTs } from '../data/graphqlQueries';
+import { GET_PRODUCTs, UPDATE_PRODUCT } from '../data/graphqlQueries';
 import { Product } from '../models/product';
-import { logger } from '@shared/utils/logger';
 
-test.describe('GraphQL test suite', () => {
-  test.only('Get products', async ({ graphQLApi }) => {
+test.describe('Product Management GraphQL requests', () => {
+  test('Get products', async ({ graphQLApi }) => {
     const response = await graphQLApi.send(GET_PRODUCTs);
     expect(response.status()).toBe(200);
     const responseJson = await response.json();
-    logger.info(JSON.stringify(responseJson, null, 2));
     expect(Array.isArray(responseJson.data.products)).toBeTruthy();
     const products: Product[] = responseJson.data.products;
     for (const product of products) {
@@ -16,5 +14,21 @@ test.describe('GraphQL test suite', () => {
       expect(typeof product.price).toBe('number');
       expect(Array.isArray(product.categories)).toBeTruthy();
     }
+  });
+
+  test('Update a product', async ({ graphQLApi }) => {
+    const newInfoProduct = {
+      "name": "Grey Hoodie",
+      "price": 2499
+    }
+
+    const response = await graphQLApi.send(
+      UPDATE_PRODUCT,
+      {
+        id: "ckdu44mn40gxh010405uwgbtw",
+        input: newInfoProduct
+      }
+    );
+    expect(response.status()).toBe(200);
   });
 });

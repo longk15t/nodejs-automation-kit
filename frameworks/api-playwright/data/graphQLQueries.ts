@@ -13,18 +13,22 @@ export const GET_PRODUCTs = `
   }
 `;
 
-export const CREATE_USER = `
-  mutation CreateUser($input: CreateUserInput!) {
-    createUser(input: $input) {
+export const UPDATE_PRODUCT = `
+  mutation UpdateProduct($id: ID!, $data: ProductUpdateInput!) {
+    updateProduct(
+      where: { id: $id }
+      data: $data
+    ) {
       id
       name
-      email
+      slug
+      price
+      categories {
+        id
+        name
+        publishedAt
+        locale
+      }
     }
-  }
-`;
-
-export const DELETE_USER = `
-  mutation DeleteUser($id: ID!) {
-    deleteUser(id: $id)
   }
 `;
