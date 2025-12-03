@@ -1,4 +1,12 @@
 {
+  "pageUrl": "/wellness-plan",
+  "mainHeading": {
+    "expectedText": "Peace of mind and real savings",
+    "fontFamily": "Poppins",
+    "fontSize": "64px",
+    "fontWeight": "700",
+    "color": "rgb(0, 48, 45)"
+  },
   "membershipItems": [
     "Unlimited vet consultations", 
     "Annual core vaccinations", 

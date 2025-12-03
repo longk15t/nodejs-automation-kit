@@ -7,7 +7,7 @@ export class HomePage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.mainHeading = page.getByText('Preventative vet care made simple and affordable.');
+    this.mainHeading = this.page.getByText('Preventative vet care made simple and affordable.');
   }
 
   async gotoHome() {

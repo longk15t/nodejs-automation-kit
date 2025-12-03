@@ -9,8 +9,8 @@ export class AboutPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.header = page.getByRole('heading', { name: 'About' })
-    this.sectionOurServices = page.locator('text=Providing the best care for your pet should be as easy as loving them!');
+    this.header = this.page.getByRole('heading', { name: 'About' })
+    this.sectionOurServices = this.page.locator('text=Providing the best care for your pet should be as easy as loving them!');
   }
 
   async gotoAbout() {

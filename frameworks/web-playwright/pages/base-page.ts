@@ -27,4 +27,15 @@ export class BasePage {
   async setViewPort(w: number, h: number): Promise<void> {
     await this.page.setViewportSize({width: w, height: h});
   }
+
+  async getStyle(element: Locator, property: string): Promise<string> {
+    const isElementFound = await element.elementHandle();
+    if (!isElementFound) throw new Error(`Element not found for style extraction: ${element}`);
+
+    const value = await element.evaluate((el, prop: any) => {
+      return window.getComputedStyle(el).getPropertyValue(prop);
+    }, property);
+
+    return value.trim();
+  }
 }

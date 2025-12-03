@@ -9,8 +9,8 @@ export class WellnessPlanPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.joinPlanButton = page.getByRole('button', {name: 'Join Wellness Plan'});
-    this.mainHeading = page.getByText('Peace of mind and real savings');
+    this.joinPlanButton = this.page.getByRole('button', {name: 'Join Wellness Plan'});
+    this.mainHeading = this.page.getByText('Peace of mind and real savings');
   }
 
   async goToWellnessPlanPage(): Promise<void> {
