@@ -1,6 +1,4 @@
-// tests/petstore.api.spec.ts
 import { test, expect } from '@shared/fixtures/fixture';
-import { env } from '@shared/config/env';
 
 test.describe('Petstore API - CRUD for Pet', () => {
   const createdPetId: number = Math.floor(1000000000 + Math.random() * 9000000000);
