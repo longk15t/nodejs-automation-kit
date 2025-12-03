@@ -41,9 +41,9 @@ automation-monorepo/
 - Uses Playwright Test Runner
 - Supports browser and mobile viewport (Chrome, Google Pixel 7 and iPhone 13)
 - Functional tests
-- CMS content tests
+- CMS content validation (text, content, font size, font family, ...)
 - Test tagging
-- Visual testing (full page/section)
+- Visual testing (full page/section/element)
 - HTML report including trace/screenshot for failure
 
 Run tests:

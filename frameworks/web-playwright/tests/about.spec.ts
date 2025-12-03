@@ -15,4 +15,14 @@ test.describe('About page', () => {
     await aboutPage.gotoAbout();
     await expect(aboutPage.sectionOurServices).toBeVisible();
   });
+
+  test('should fail the test', 
+    { tag: '@regression' },
+    async ({ aboutPage }) => {
+    await aboutPage.gotoAbout();
+    await expect(aboutPage.sectionOurServices)
+    .toHaveText('Provide the best care for your pet should be as easy as loving them!',
+      {timeout: 1000}
+    );
+  });
 });
