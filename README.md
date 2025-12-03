@@ -59,7 +59,8 @@ npm run test:web
 - Located in: `frameworks/api-playwright/`
 - No external libraries needed
 - Supports authenticated API tests
-- Includes GET + POST example tests
+- Restful API testing (GET/POST/PUT/DELETE/...)
+- GraphQL API testing (query, mutation)
 
 Run tests:
 
