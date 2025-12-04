@@ -36,6 +36,18 @@ jobs:
           node-version: 'lts/*'
           cache: 'npm'
 
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(node -p "require('./package.json').devDependencies['@playwright/test']")" >> $GITHUB_OUTPUT
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright # Adjust path for Windows or macOS
+          key: playwright-browsers-${{ runner.os }}-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
+          restore-keys: |
+              playwright-browsers-${{ runner.os }}-
+                
       - name: Install dependencies
         run: |
           npm ci
@@ -49,9 +61,9 @@ jobs:
       - name: Run Playwright Web Tests
         run: |
           if [ "${{ inputs.platform }}" == "chrome" ]; then
-            NODE_ENV=$${{ inputs.environment }} npm test:web
+            NODE_ENV=$${{ inputs.environment }} npm run test:web
           else
-            NODE_ENV=$${{ inputs.environment }} npm test:web:${{inputs.platform}}
+            NODE_ENV=$${{ inputs.environment }} npm run test:web:${{inputs.platform}}
           fi
 
       - name: Upload Playwright report
