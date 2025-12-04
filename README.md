@@ -178,13 +178,9 @@ This ensures clean isolation but shared conventions.
 
 ## 🔧 CI/CD Integration
 
-You may add GitHub Actions / GitLab pipelines to:
-
 - Run each test suite independently
 - Parallelize framework execution
 - Upload Playwright / WDIO reports
-
-CI folder example:
 
 ```
 .github/workflows/
@@ -193,13 +189,12 @@ CI folder example:
   └── test-mobile.yml
 ```
 
-(Ask if you want these auto-generated.)
-
 ---
 
 ## 🛠️ Future Enhancements
 
 - Add **Allure reports**
+- Add test with **mock data**
 - Add **Dockerized appium service**
 - Add **test data management**
 - Add **environment profiles**
@@ -215,13 +210,3 @@ This repository is provided as an example template.
 You may reuse and modify it freely.
 
 ---
-
-## 🙋 Need Add-ons?
-
-I can generate:
-
-- Full folder structure
-- All config files
-- Sample specs for all frameworks
-- CI YAML pipelines
-- Allure reporting setup
