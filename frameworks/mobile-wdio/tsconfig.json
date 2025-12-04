@@ -21,5 +21,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
   },
-  "include": ["tests/**/*", "wdio.conf.ts", "screens/base-page.ts"]
+  "include": ["tests/**/*", "screens/base-page.ts"]
 }

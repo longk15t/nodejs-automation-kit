@@ -1,6 +1,6 @@
 const { config } = require("./wdio.share.conf");
 require('dotenv').config({
-  path:'./../.env'
+  path:`../../.env.${process.env.NODE_ENV} || dev`
 });
 /**
  * BrowserStack Credentials

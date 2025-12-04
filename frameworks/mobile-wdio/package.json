@@ -4,6 +4,7 @@
   "scripts": {
     "allure-report": "allure serve allure-results",
     "test:android": "npx wdio run config/android-wdio.conf.js",
+    "test:browserstack": "npx wdio run config/android-wdio.bs.conf.js",
     "test:ios": "npx wdio run config/ios-wdio.conf.ts"
   },
   "devDependencies": {

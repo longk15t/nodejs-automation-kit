@@ -11,6 +11,7 @@
     "test:web:ios": "npm --prefix frameworks/web-playwright run test:ios", 
     "test:api": "npm --prefix frameworks/api-playwright run test",
     "test:mobile:android": "npm --prefix frameworks/mobile-wdio run test:android",
+    "test:mobile:browserstack": "npm --prefix frameworks/mobile-wdio run test:browserstack",
     "test:mobile:ios": "npm --prefix frameworks/mobile-wdio run test:ios"
   },
   "keywords": [],
