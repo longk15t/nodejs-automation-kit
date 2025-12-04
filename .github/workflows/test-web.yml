@@ -2,6 +2,25 @@ name: Web UI Tests (Playwright)
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: Which environment to run tests on?
+        required: true
+        type: choice
+        options:
+          - 'dev'
+          - 'staging'
+          - 'production'
+        default: 'dev'
+      platform:
+        description: Which platform to run tests on?
+        required: true
+        type: choice
+        options:
+          - 'chrome'
+          - 'android'
+          - 'ios'
+        default: 'chrome'
 
 jobs:
   test-web:
@@ -14,21 +33,26 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-
-      - name: Install PNPM
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+          node-version: 'lts/*'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          npm ci
+          npm install --prefix frameworks/web-playwright/
 
       - name: Install Playwright Browsers
-        run: pnpx playwright install --with-deps
+        run: |
+          cd frameworks/web-playwright/
+          npx playwright install --with-deps
 
       - name: Run Playwright Web Tests
-        run: pnpm test:web
+        run: |
+          if [ "${{ inputs.platform }}" == "chrome" ]; then
+            NODE_ENV=$${{ inputs.environment }} npm test:web
+          else
+            NODE_ENV=$${{ inputs.environment }} npm test:web:${{inputs.platform}}
+          fi
 
       - name: Upload Playwright report
         if: always()
@@ -36,3 +60,4 @@ jobs:
         with:
           name: playwright-report
           path: frameworks/web-playwright/playwright-report/
+          if-no-files-found: ignore
