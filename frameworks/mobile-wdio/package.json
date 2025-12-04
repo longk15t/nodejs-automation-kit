@@ -2,7 +2,9 @@
   "name": "mobile-wdio",
   "version": "1.0.0",
   "scripts": {
-    "wdio": "npx wdio run ./wdio.conf.ts"
+    "allure-report": "allure serve allure-results",
+    "test:android": "npx wdio run config/android-wdio.conf.js",
+    "test:ios": "npx wdio run config/ios-wdio.conf.ts"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
