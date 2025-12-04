@@ -2,6 +2,16 @@ name: API Tests (Playwright)
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: Which environment to run tests on?
+        required: true
+        type: choice
+        options:
+          - 'dev'
+          - 'staging'
+          - 'production'
+        default: 'dev'
 
 jobs:
   test-api:
@@ -14,25 +24,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-
-      - name: Install PNPM
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+          node-version: 'lts/*'
+          cache: 'npm'
 
       - name: Install dependencies
         run: |
-          pnpm install
-          pnpm install --filter api-playwright
+          npm ci
+          npm install --prefix frameworks/api-playwright/
 
       - name: Run API Tests (Playwright)
-        run: pnpm test:api
+        run: NODE_ENV=${{inputs.environment}} npm run test:api
 
       - name: Upload API Test Report (if any)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: api-playwright-report
-          path: frameworks/api-playwright/test-results/
+          path: frameworks/api-playwright/playwright-report/
           if-no-files-found: ignore

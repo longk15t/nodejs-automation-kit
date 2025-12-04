@@ -2,7 +2,6 @@ import path from "path";
 import dotenv from "dotenv";
 
 const environmentName = process.env.NODE_ENV || "dev";
-console.log(`Running tests on ${environmentName} environment`);
 const envFile = `../../.env.${environmentName}`;
 dotenv.config({ path: path.resolve(process.cwd(), envFile), quiet: true });
 

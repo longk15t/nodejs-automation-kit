@@ -1,5 +1,5 @@
 import { test, expect } from '@shared/fixtures/fixture';
-import { GET_PRODUCTs, UPDATE_PRODUCT } from '../data/graphqlQueries';
+import { GET_PRODUCTs, UPDATE_PRODUCT } from '../data/graphQLQueries';
 import { Product } from '../models/product';
 
 test.describe('Product Management GraphQL requests', () => {
