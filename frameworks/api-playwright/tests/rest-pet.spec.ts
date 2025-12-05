@@ -16,6 +16,8 @@ test.describe('Petstore API - CRUD for Pet', () => {
     };
     const resp = await petApi.createPet(newPet);
     expect(resp.ok()).toBeTruthy();
+    await petApi.printResponse(resp);
+
     const body = await resp.json();
     expect(body).toHaveProperty('id');
     expect(body.name).toBe(newPet.name);

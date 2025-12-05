@@ -61,6 +61,7 @@ npm run test:web
 - Supports authenticated API tests
 - Restful API testing (GET/POST/PUT/DELETE/...)
 - GraphQL API testing (query, mutation)
+- Response schema validation
 
 Run tests:
 
