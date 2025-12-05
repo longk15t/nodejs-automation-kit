@@ -21,6 +21,6 @@
 
     "outDir": "dist"
   },
-  "include": ["shared/**/*"],
+  "include": ["shared/**/*", "frameworks/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -12,7 +12,8 @@
     "test:api": "npm --prefix frameworks/api-playwright run test",
     "test:mobile:android": "npm --prefix frameworks/mobile-wdio run test:android",
     "test:mobile:browserstack": "npm --prefix frameworks/mobile-wdio run test:browserstack",
-    "test:mobile:ios": "npm --prefix frameworks/mobile-wdio run test:ios"
+    "test:mobile:ios": "npm --prefix frameworks/mobile-wdio run test:ios",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +25,20 @@
     "@typescript-eslint/parser": "^8.48.0",
     "dotenv": "^17.2.3",
     "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-playwright": "^2.4.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.7.2",
     "typescript": "^5.9.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "npx eslint --fix",
+      "npx prettier --write"
+    ]
   }
 }
