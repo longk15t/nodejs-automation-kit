@@ -1,6 +1,6 @@
-const { config } = require("./wdio.share.conf");
+const { config } = require('./wdio.share.conf');
 require('dotenv').config({
-  path:`../../.env.${process.env.NODE_ENV} || dev`
+  path: `../../.env.${process.env.NODE_ENV} || dev`,
 });
 /**
  * BrowserStack Credentials
@@ -8,11 +8,10 @@ require('dotenv').config({
 config.user = process.env.BROWSERSTACK_USER;
 config.key = process.env.BROWSERSTACK_KEY;
 
-
 /**
  * Specs
  */
-config.specs = ["../tests/android-*.ts"];
+config.specs = ['../tests/android-*.ts'];
 
 /**
  * Capabilities
@@ -20,15 +19,14 @@ config.specs = ["../tests/android-*.ts"];
 
 config.capabilities = [
   {
-    platformName: "Android",
-    "appium:deviceName": "Samsung Galaxy S22 Ultra",
-    "appium:platformVersion": "12.0",
-    "appium:automationName": "UIAutomator2",
-    "appium:app": "bs://3e07480423bf0b18950bfe09bb18a66340704c7e",
-    "appium:autoGrantPermissions": true,
+    platformName: 'Android',
+    'appium:deviceName': 'Samsung Galaxy S22 Ultra',
+    'appium:platformVersion': '12.0',
+    'appium:automationName': 'UIAutomator2',
+    'appium:app': 'bs://3e07480423bf0b18950bfe09bb18a66340704c7e',
+    'appium:autoGrantPermissions': true,
   },
 ];
 
 // Test runner services
-config.services = ["browserstack"],
-exports.config = config;
+((config.services = ['browserstack']), (exports.config = config));

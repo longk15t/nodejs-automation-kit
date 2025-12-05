@@ -7,21 +7,16 @@ export class GraphQLClientApi extends BaseApi {
     super(requestContext);
   }
 
-  async send(
-    query: string,
-    variables?: Record<string, any>): Promise<APIResponse> {
-    const response = await this.requestContext.post(
-      `${env.graphQLUrl}/content/clv6lwqu7000001w690st4vix/master`, 
-      {
-        headers: {
+  async send(query: string, variables?: Record<string, any>): Promise<APIResponse> {
+    const response = await this.requestContext.post(`${env.graphQLUrl}/content/clv6lwqu7000001w690st4vix/master`, {
+      headers: {
         'Content-Type': 'application/json',
-        },
-        data: {
-          query,
-          variables
-        }
-      }
-    );
+      },
+      data: {
+        query,
+        variables,
+      },
+    });
 
     return response;
   }

@@ -1,19 +1,19 @@
-import { defineConfig, devices } from "@playwright/test";
-import { env } from "@shared/config/env";
+import { defineConfig, devices } from '@playwright/test';
+import { env } from '@shared/config/env';
 
 const isCI = !!process.env.CI;
 const isHeadless = !process.argv.includes('--headed');
 
 export default defineConfig({
-  testDir: "./tests",
+  testDir: './tests',
   expect: { timeout: env.timeout },
   timeout: env.timeout,
-  workers: process.env.CI ? 2 : 1, 
+  workers: process.env.CI ? 2 : 1,
   fullyParallel: false,
-  reporter:[
+  reporter: [
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
     ['json', { outputFile: 'test-results/results.json' }],
-    ['junit', { outputFile: 'test-results/results.xml' }]
+    ['junit', { outputFile: 'test-results/results.xml' }],
   ],
   use: {
     baseURL: env.baseUrl,
@@ -27,19 +27,19 @@ export default defineConfig({
       name: 'chrome',
       use: {
         ...devices['Desktop Chrome'],
-        viewport: (isCI || isHeadless) ? { width: 1920, height: 1080 } : null,
-        deviceScaleFactor: (isCI) ? 1 : undefined,
+        viewport: isCI || isHeadless ? { width: 1920, height: 1080 } : null,
+        deviceScaleFactor: isCI ? 1 : undefined,
         launchOptions: {
-          args: (isCI || isHeadless) ? [] : ['--start-maximized'],
+          args: isCI || isHeadless ? [] : ['--start-maximized'],
         },
-      }
+      },
     },
     {
       name: 'android',
       use: {
         browserName: 'chromium',
         ...devices['Pixel 7'],
-        headless: true
+        headless: true,
       },
     },
     {
@@ -52,5 +52,5 @@ export default defineConfig({
           'Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/604.1',
       },
     },
-  ]
+  ],
 });

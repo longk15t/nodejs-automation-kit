@@ -10,21 +10,17 @@ class LoginScreen extends BasePage {
   }
 
   get loginButton() {
-    return $(
-      '//android.view.ViewGroup[@content-desc="Login button"]/android.widget.TextView'
-    );
+    return $('//android.view.ViewGroup[@content-desc="Login button"]/android.widget.TextView');
   }
 
   get errorMessage() {
-    return $(
-      '//android.view.ViewGroup[@content-desc="generic-error-message"]/android.widget.TextView'
-    );
+    return $('//android.view.ViewGroup[@content-desc="generic-error-message"]/android.widget.TextView');
   }
 
   // Methods for actions
   async enterCredentials(user: string, pass: string) {
-    await this.setValue(this.userName,user);
-    await this.setValue(this.password,pass);
+    await this.setValue(this.userName, user);
+    await this.setValue(this.password, pass);
   }
 
   async clickLogin() {

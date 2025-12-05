@@ -4,7 +4,7 @@ test.describe('Petstore API - CRUD for Pet', () => {
   const createdPetId: number = Math.floor(1000000000 + Math.random() * 9000000000);
 
   test.beforeEach(async ({ petApi }) => {
-      await petApi.createContext();
+    await petApi.createContext();
   });
 
   test('POST /pet – create new pet', async ({ petApi }) => {
@@ -12,7 +12,7 @@ test.describe('Petstore API - CRUD for Pet', () => {
       id: createdPetId,
       name: 'TestPet-' + Date.now(),
       photoUrls: ['http://example.com/photo1'],
-      status: 'available'
+      status: 'available',
     };
     const resp = await petApi.createPet(newPet);
     expect(resp.ok()).toBeTruthy();
@@ -34,7 +34,7 @@ test.describe('Petstore API - CRUD for Pet', () => {
       id: createdPetId,
       name: 'UpdatedPetName',
       photoUrls: ['http://example.com/photo1'],
-      status: 'sold'
+      status: 'sold',
     };
     const resp = await petApi.updatePet(updated);
     // Some servers return 200 for update — depends on implementation

@@ -2,8 +2,7 @@ import { test, expect } from '@shared/fixtures/fixture';
 import wellnessContent from '../data/wellness-plan-content.json';
 
 test.describe('CMS Content Validation', () => {
-  test('should validate all membership items in Wellness Plan page', 
-    { tag: '@cms' }, async ({ wellnessPlanPage }) => {
+  test('should validate all membership items in Wellness Plan page', { tag: '@cms' }, async ({ wellnessPlanPage }) => {
     await wellnessPlanPage.navigateTo(wellnessContent.pageUrl);
     await expect(wellnessPlanPage.mainHeading).toBeVisible();
     await expect(wellnessPlanPage.mainHeading).toHaveText(wellnessContent.mainHeading.expectedText);

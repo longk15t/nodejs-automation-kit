@@ -1,6 +1,6 @@
-import { env } from "./env";
+import { env } from './env';
 
 export const loggerConfig = {
   level: env.logLevel,
-  enabled: env.logLevel !== "off",
+  enabled: env.logLevel !== 'off',
 };

@@ -1,4 +1,4 @@
-import { loggerConfig } from "@shared/config/logger.config";
+import { loggerConfig } from '@shared/config/logger.config';
 
 export class Logger {
   info(message: string, ...args: unknown[]) {

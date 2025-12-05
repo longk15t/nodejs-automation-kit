@@ -1,5 +1,5 @@
-import { request, APIRequestContext } from "@playwright/test";
-import { env } from "../config/env";
+import { request, APIRequestContext } from '@playwright/test';
+import { env } from '../config/env';
 
 export class ApiClient {
   private context!: APIRequestContext;

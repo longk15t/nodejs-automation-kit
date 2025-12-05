@@ -18,17 +18,14 @@ test.describe('Product Management GraphQL requests', () => {
 
   test('Update a product', async ({ graphQLApi }) => {
     const newInfoProduct = {
-      "name": "Grey Hoodie",
-      "price": 2499
-    }
+      name: 'Grey Hoodie',
+      price: 2499,
+    };
 
-    const response = await graphQLApi.send(
-      UPDATE_PRODUCT,
-      {
-        id: "ckdu44mn40gxh010405uwgbtw",
-        input: newInfoProduct
-      }
-    );
+    const response = await graphQLApi.send(UPDATE_PRODUCT, {
+      id: 'ckdu44mn40gxh010405uwgbtw',
+      input: newInfoProduct,
+    });
     expect(response.status()).toBe(400);
   });
 });

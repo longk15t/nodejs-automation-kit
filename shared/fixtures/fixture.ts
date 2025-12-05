@@ -1,8 +1,6 @@
 import { test as apiTest } from './api-fixtures';
 import { test as uiTest } from './ui-fixtures';
-import {
-  mergeTests
-} from '@playwright/test';
+import { mergeTests } from '@playwright/test';
 
 export const test = mergeTests(uiTest, apiTest);
 export {
@@ -14,5 +12,5 @@ export {
   Locator,
   FrameLocator,
   devices,
-  expect
+  expect,
 } from '@playwright/test';

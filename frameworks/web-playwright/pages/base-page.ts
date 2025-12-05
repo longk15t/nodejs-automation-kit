@@ -25,7 +25,7 @@ export class BasePage {
   }
 
   async setViewPort(w: number, h: number): Promise<void> {
-    await this.page.setViewportSize({width: w, height: h});
+    await this.page.setViewportSize({ width: w, height: h });
   }
 
   async getStyle(element: Locator, property: string): Promise<string> {

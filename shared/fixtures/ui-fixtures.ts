@@ -21,5 +21,5 @@ export const test = base.extend<{
   },
   petAdvicePage: async ({ page }, use) => {
     await use(new PetAdvicePage(page));
-  }
+  },
 });

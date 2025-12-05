@@ -1,16 +1,16 @@
 import allure from 'allure-commandline';
 export const config = {
-  runner: "local",
+  runner: 'local',
 
   exclude: [],
 
   maxInstances: 1,
 
-  logLevel: "info",
+  logLevel: 'info',
 
   bail: 0,
 
-  baseUrl: "http://localhost",
+  baseUrl: 'http://localhost',
 
   waitforTimeout: 10000,
 
@@ -18,14 +18,14 @@ export const config = {
 
   connectionRetryCount: 3,
 
-  framework: "mocha",
+  framework: 'mocha',
 
   reporters: [
-    "spec",
+    'spec',
     [
-      "allure",
+      'allure',
       {
-        outputDir: "allure-results",
+        outputDir: 'allure-results',
         disableWebdriverStepsReporting: false,
         disableWebdriverScreenshotsReporting: false,
       },
@@ -33,7 +33,7 @@ export const config = {
   ],
 
   mochaOpts: {
-    ui: "bdd",
+    ui: 'bdd',
     timeout: 60000,
   },
   //
@@ -130,11 +130,7 @@ export const config = {
    * @param {Boolean} result.passed    true if test has passed, otherwise false
    * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  afterTest: async function (
-    test,
-    context,
-    { error, result, duration, passed, retries }
-  ) {
+  afterTest: async function (test, context, { error, result, duration, passed, retries }) {
     if (error) {
       await browser.takeScreenshot();
     }
@@ -178,21 +174,21 @@ export const config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
-   */ 
+   */
   onComplete: function (exitCode, config, capabilities, results) {
-    const reportError = new Error("Could not generate Allure report");
-    const generation = allure(["generate", "allure-results", "--clean"]);
+    const reportError = new Error('Could not generate Allure report');
+    const generation = allure(['generate', 'allure-results', '--clean']);
     return new Promise((resolve, reject) => {
       const generationTimeout = setTimeout(() => reject(reportError), 5000);
 
-      generation.on("exit", function (exitCode) {
+      generation.on('exit', function (exitCode) {
         clearTimeout(generationTimeout);
 
         if (exitCode !== 0) {
           return reject(reportError);
         }
 
-        console.log("Allure report successfully generated");
+        console.log('Allure report successfully generated');
         resolve();
       });
     });

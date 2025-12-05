@@ -1,5 +1,5 @@
 export type Category = {
-    name: string;
-    publishedAt: string;
-    locale: string;
-}
+  name: string;
+  publishedAt: string;
+  locale: string;
+};

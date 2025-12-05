@@ -97,6 +97,7 @@ npm install --prefix frameworks/mobile-wdio
 ```
 
 Install Playwright dependencies
+
 ```sh
 cd frameworks/web-playwright
 npx playwright install
@@ -159,7 +160,7 @@ The `shared/` directory is used for reusable helpers such as:
 Imported via TypeScript path aliases:
 
 ```ts
-import { something } from "@shared/utils";
+import { something } from '@shared/utils';
 ```
 
 ---
