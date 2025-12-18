@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 export function randomString(length = 8): string {
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
   return Array.from({ length })
@@ -7,4 +9,8 @@ export function randomString(length = 8): string {
 
 export function randomEmail(): string {
   return `user_${randomString(6)}@test.com`;
+}
+
+export function randomWords(): string {
+  return faker.lorem.lines(1);
 }

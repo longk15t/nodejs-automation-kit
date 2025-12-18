@@ -10,6 +10,7 @@ export interface AppEnv {
   baseUrl: string;
   apiUrl: string;
   graphQLUrl: string;
+  postsApiUrl?: string;
   timeout: number;
   logLevel: string;
 }
@@ -19,6 +20,7 @@ export const env: AppEnv = {
   baseUrl: process.env.WEB_BASE_URL ?? '',
   apiUrl: process.env.REST_API_URL ?? '',
   graphQLUrl: process.env.GRAPHQL_URL ?? '',
+  postsApiUrl: process.env.POSTS_API_URL ?? '',
   timeout: Number(process.env.TEST_TIMEOUT) * 1000,
   logLevel: process.env.LOG_LEVEL ?? 'info',
 };

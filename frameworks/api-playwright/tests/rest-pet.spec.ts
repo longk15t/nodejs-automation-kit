@@ -1,4 +1,5 @@
 import { test, expect } from '@shared/fixtures/fixture';
+import { Pet } from '../models/pet';
 
 test.describe('Petstore API - CRUD for Pet', () => {
   const createdPetId: number = Math.floor(1000000000 + Math.random() * 9000000000);
@@ -32,7 +33,7 @@ test.describe('Petstore API - CRUD for Pet', () => {
   });
 
   test('PUT /pet – update pet', async ({ petApi }) => {
-    const updated = {
+    const updated: Pet = {
       id: createdPetId,
       name: 'UpdatedPetName',
       photoUrls: ['http://example.com/photo1'],

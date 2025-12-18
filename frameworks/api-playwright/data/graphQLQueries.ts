@@ -32,3 +32,28 @@ export const UPDATE_PRODUCT = `
     }
   }
 `;
+
+export const GET_POSTS_BY_ID = `
+  query GetPost($id: ID!) {
+    user(id: $id) {
+      posts {
+        data {
+          id
+          title
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_POST = `
+  mutation (
+    $id: ID!,
+    $input: UpdatePostInput!
+  ) {
+    updatePost(id: $id, input: $input) {
+      id
+      body
+    }
+  }
+`;
