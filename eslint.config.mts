@@ -11,7 +11,7 @@ const prettierConfig = {
   printWidth: 120,
   trailingComma: "all",
   arrowParens: "always",
-  endOfLine: "lf",
+  endOfLine: "auto",
   bracketSpacing: true
 };
 
