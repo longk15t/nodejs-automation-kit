@@ -1,5 +1,5 @@
-import { test as apiTest } from './api-fixtures';
-import { test as uiTest } from './ui-fixtures';
+import { test as apiTest } from './api.fixture';
+import { test as uiTest } from './ui.fixture';
 import { mergeTests } from '@playwright/test';
 
 export const test = mergeTests(uiTest, apiTest);
