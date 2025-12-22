@@ -16,7 +16,7 @@ export class PetAdvicePage extends BasePage {
     this.catAdviceButton = this.page.getByRole('link', { name: 'Cat Advice' });
   }
 
-  async gotoPetAdvicePage() {
+  async gotoPetAdvicePage(): Promise<void> {
     logger.info('Navigate to Pet Advice page');
     await this.navigateTo(`${env.baseUrl}/pet-advice/`);
   }

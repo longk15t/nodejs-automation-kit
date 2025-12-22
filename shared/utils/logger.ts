@@ -1,15 +1,16 @@
+/* eslint-disable no-console */
 import { loggerConfig } from '@shared/config/logger.config';
 
 export class Logger {
-  info(message: string, ...args: unknown[]) {
+  info(message: string, ...args: unknown[]): void {
     if (loggerConfig.enabled) console.log(`[INFO] ${message}`, ...args);
   }
 
-  warn(message: string, ...args: unknown[]) {
+  warn(message: string, ...args: unknown[]): void {
     if (loggerConfig.enabled) console.warn(`[WARN] ${message}`, ...args);
   }
 
-  error(message: string, ...args: unknown[]) {
+  error(message: string, ...args: unknown[]): void {
     if (loggerConfig.enabled) console.error(`[ERROR] ${message}`, ...args);
   }
 }

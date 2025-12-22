@@ -15,7 +15,7 @@ export class AboutPage extends BasePage {
     );
   }
 
-  async gotoAbout() {
+  async gotoAbout(): Promise<void> {
     logger.info('Navigate to About page');
     await this.navigateTo(`${env.baseUrl}/about/`);
   }

@@ -32,7 +32,7 @@ export class BasePage {
     const isElementFound = await element.elementHandle();
     if (!isElementFound) throw new Error(`Element not found for style extraction: ${element}`);
 
-    const value = await element.evaluate((el, prop: any) => {
+    const value = await element.evaluate((el, prop: string) => {
       return window.getComputedStyle(el).getPropertyValue(prop);
     }, property);
 

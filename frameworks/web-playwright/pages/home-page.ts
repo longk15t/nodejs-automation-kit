@@ -10,7 +10,7 @@ export class HomePage extends BasePage {
     this.mainHeading = this.page.getByText('Preventative vet care made simple and affordable.');
   }
 
-  async gotoHome() {
+  async gotoHome(): Promise<void> {
     logger.info('Navigate to home page');
     await this.navigateTo('');
   }
