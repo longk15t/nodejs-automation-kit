@@ -1,12 +1,12 @@
 import { test, expect } from '@shared/fixtures/fixture';
 import { randomWords } from '@shared/utils/random';
-import { GET_POSTS_BY_ID, UPDATE_POST, GET_PRODUCTs, UPDATE_PRODUCT } from '../data/graphQLQueries';
+import { GET_POSTS_BY_ID, UPDATE_POST, GET_PRODUCTs, UPDATE_PRODUCT } from '../data/graphql-queries';
 import { Product } from '../models/product';
 import { Post } from '../models/post';
 
 test.describe('Product Management GraphQL requests', () => {
-  test('Get products', async ({ graphQLApi }) => {
-    const response = await graphQLApi.sendProducts(GET_PRODUCTs);
+  test('Get products', async ({ productsApi }) => {
+    const response = await productsApi.send(GET_PRODUCTs);
     expect(response.status()).toBe(200);
     const responseJson = await response.json();
     expect(Array.isArray(responseJson.data.products)).toBeTruthy();
@@ -18,13 +18,13 @@ test.describe('Product Management GraphQL requests', () => {
     }
   });
 
-  test('Update a product', async ({ graphQLApi }) => {
+  test('Update a product', async ({ productsApi }) => {
     const newInfoProduct = {
       name: 'Grey Hoodie',
       price: 2499,
     };
 
-    const response = await graphQLApi.sendProducts(UPDATE_PRODUCT, {
+    const response = await productsApi.send(UPDATE_PRODUCT, {
       id: 'ckdu44mn40gxh010405uwgbtw',
       input: newInfoProduct,
     });
@@ -33,8 +33,8 @@ test.describe('Product Management GraphQL requests', () => {
 });
 
 test.describe('Posts GraphQL requests', () => {
-  test('Get Posts by user id', async ({ graphQLApi }) => {
-    const response = await graphQLApi.sendPosts(GET_POSTS_BY_ID, { id: 1 });
+  test('Get Posts by user id', async ({ postsApi }) => {
+    const response = await postsApi.send(GET_POSTS_BY_ID, { id: 1 });
     expect(response.status()).toBe(200);
     const responseJson = await response.json();
     expect(Array.isArray(responseJson.data.user.posts.data)).toBeTruthy();
@@ -45,12 +45,12 @@ test.describe('Posts GraphQL requests', () => {
     }
   });
 
-  test('Update a post', async ({ graphQLApi }) => {
+  test('Update a post', async ({ postsApi }) => {
     const newInfoProduct = {
       body: randomWords(),
     };
 
-    const response = await graphQLApi.sendPosts(UPDATE_POST, {
+    const response = await postsApi.send(UPDATE_POST, {
       id: '1',
       input: newInfoProduct,
     });

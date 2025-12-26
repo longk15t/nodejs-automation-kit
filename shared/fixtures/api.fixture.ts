@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { APIRequestContext, test as base, type APIResponse, type TestInfo } from '@playwright/test';
 import { PetApi } from '../../frameworks/api-playwright/requests/pet-api';
-import { GraphQLClientApi } from '../../frameworks/api-playwright/requests/graphql-api';
+import { ProductsApi } from '../../frameworks/api-playwright/requests/products-api';
+import { PostsApi } from '../../frameworks/api-playwright/requests/posts-api';
 import { logger } from '@shared/utils/logger';
 
 // ============= TYPES =============
@@ -161,15 +162,21 @@ function logApiInfo(request: APIRequestContext, testInfo: TestInfo): void {
 
 export const test = base.extend<{
   petApi: PetApi;
-  graphQLApi: GraphQLClientApi;
+  productsApi: ProductsApi;
+  postsApi: PostsApi;
 }>({
   petApi: async ({ request }, use, testInfo) => {
     logApiInfo(request, testInfo);
     await use(new PetApi(request));
   },
 
-  graphQLApi: async ({ request }, use, testInfo) => {
+  productsApi: async ({ request }, use, testInfo) => {
     logApiInfo(request, testInfo);
-    await use(new GraphQLClientApi(request));
+    await use(new ProductsApi(request));
+  },
+
+  postsApi: async ({ request }, use, testInfo) => {
+    logApiInfo(request, testInfo);
+    await use(new PostsApi(request));
   },
 });
