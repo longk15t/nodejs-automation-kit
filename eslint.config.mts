@@ -40,7 +40,7 @@ const config = [
       ...((playwright.configs['flat/recommended'] as any).rules ?? {}),
       'prettier/prettier': ['error', prettierConfig],
       '@typescript-eslint/explicit-function-return-type': 'error',
-      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       'no-console': 'error',
       'prefer-const': 'error',

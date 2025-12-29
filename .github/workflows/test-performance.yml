@@ -1,0 +1,55 @@
+name: Performance Tests (k6 Cloud)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      execution_type:
+        description: 'Where to run the test'
+        required: true
+        default: 'local'
+        type: choice
+        options:
+          - local
+          - cloud
+      environment:
+        description: 'Environment to run tests against'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - uat
+
+jobs:
+  performance-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Run k6 Performance Test
+        uses: grafana/k6-action@v0.3.1
+        with:
+          filename: ${{ github.event.inputs.execution_type == 'cloud' && 'dist/pet-lifecycle-cloud.js' || 'dist/pet-lifecycle.js' }}
+          cloud: ${{ github.event.inputs.execution_type == 'cloud' }}
+          token: ${{ github.event.inputs.execution_type == 'cloud' && secrets.K6_CLOUD_TOKEN || '' }}
+          flags: |
+            -e ENVIRONMENT=${{ github.event.inputs.environment || 'dev' }}

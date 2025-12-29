@@ -1,0 +1,22 @@
+{
+  "name": "perf-k6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test:local": "k6 run dist/pet-lifecycle.js",
+    "test:cloud": "k6 cloud dist/pet-lifecycle-cloud.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/k6": "^1.4.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "webpack": "^5.104.1",
+    "webpack-cli": "^6.0.1",
+    "ts-loader": "^9.5.4"
+  }
+}

@@ -13,6 +13,8 @@
     "test:mobile:android": "npm --prefix frameworks/mobile-wdio run test:android",
     "test:mobile:browserstack": "npm --prefix frameworks/mobile-wdio run test:browserstack",
     "test:mobile:ios": "npm --prefix frameworks/mobile-wdio run test:ios",
+    "test:perf:local": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run test:local",
+    "test:perf:cloud": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run test:cloud",
     "prepare": "husky"
   },
   "keywords": [],
