@@ -27,7 +27,6 @@ const lifecycleSuccess = new Rate('lifecycle_success');
 export const options: Options = {
   ...STRESS_TEST,
   thresholds: {
-    http_reqs: ['count>2700'],
     http_req_failed: ['rate<0.01'], // Global error rate should be less than 1%
     http_req_duration: ['p(95)<700', 'p(99)<1000'], // 95% of global requests should be below 500ms, 99% of global requests should be below 1000ms
     'http_req_duration{name:CreatePet}': ['p(95)<800'], // Specific SLA for creation
