@@ -1,9 +1,11 @@
-import { check } from 'k6';
 import { Options } from 'k6/options';
+import { SharedArray } from 'k6/data';
 import { generatePetData } from '../utils/pet';
 import { createPet, getPet, updatePet, deletePet } from '../requests/pet';
 import { faker } from '@faker-js/faker';
 
+// @ts-expect-error - jslib handles this at runtime
+import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
 // @ts-expect-error: this is a necessary suppression
 import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
 // @ts-expect-error: this is a necessary suppression
@@ -18,6 +20,15 @@ const regions = [
   ['Cape Town', 'amazon:sa:cape town'],
 ];
 const randomRegion: string[] = faker.helpers.arrayElement(regions);
+
+/**
+ * DATA POOL
+ * SharedArray is used to load data once and share it across all VUs.
+ */
+const petPool = new SharedArray('pet pool', function () {
+  return papaparse.parse(open('../data/pets.csv'), { header: true }).data;
+});
+
 export const options: Options = {
   // Cloud-specific distribution
   cloud: {
@@ -44,34 +55,18 @@ export const options: Options = {
 };
 
 export default function (): void {
+  const randomPet = petPool[Math.floor(Math.random() * petPool.length)] as any;
   const newPet: Pet = generatePetData();
+  newPet.name = randomPet.name;
+  newPet.status = randomPet.status;
 
-  // Step 1: Create a new pet
-  const createResponse = createPet(newPet);
-  check(createResponse, {
-    'pet created successfully': (r) => r.status === 200 || r.status === 201,
-  });
-
-  // Step 2: Get the pet by ID
-  const getResponse = getPet(newPet.id);
-  check(getResponse, {
-    'pet retrieved successfully': (r) => r.status === 200,
-  });
-
-  // Step 3: Update the pet information
-  const updatedPet: Pet = generatePetData();
+  // Execute Lifecycle steps (Checks are integrated into the functions)
+  createPet(newPet);
+  getPet(newPet.id);
+  const updatedPet = generatePetData();
   updatedPet.id = newPet.id;
-
-  const updateResponse = updatePet(updatedPet);
-  check(updateResponse, {
-    'pet updated successfully': (r) => r.status === 200,
-  });
-
-  // Step 4: Delete the pet
-  const deleteResponse = deletePet(newPet.id);
-  check(deleteResponse, {
-    'pet deleted successfully': (r) => r.status === 200,
-  });
+  updatePet(updatedPet);
+  deletePet(newPet.id);
 }
 
 export function handleSummary(data: any): any {

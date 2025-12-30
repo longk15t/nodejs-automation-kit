@@ -1,14 +1,24 @@
-import { check } from 'k6';
 import { Options } from 'k6/options';
+import { SharedArray } from 'k6/data';
 import { generatePetData } from '../utils/pet';
 import { createPet, getPet, updatePet, deletePet } from '../requests/pet';
 
+// @ts-expect-error - jslib handles this at runtime
+import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
 // @ts-expect-error: this is a necessary suppression
 import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
 // @ts-expect-error: this is a necessary suppression
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.2/index.js';
 import { Pet } from '../models/pet';
 import { authenticate } from '../requests/auth';
+
+/**
+ * DATA POOL
+ * SharedArray is used to load data once and share it across all VUs.
+ */
+const petPool = new SharedArray('pet pool', function () {
+  return papaparse.parse(open('../data/pets.csv'), { header: true }).data;
+});
 
 export const options: Options = {
   stages: [
@@ -35,34 +45,18 @@ export function setup(): { authToken: string } {
 }
 
 export default function (data: { authToken: string }): void {
+  const randomPet = petPool[Math.floor(Math.random() * petPool.length)] as any;
   const newPet: Pet = generatePetData();
+  newPet.name = randomPet.name;
+  newPet.status = randomPet.status;
 
-  // Step 1: Create a new pet
-  const createResponse = createPet(newPet, data.authToken);
-  check(createResponse, {
-    'pet created successfully': (r) => r.status === 200 || r.status === 201,
-  });
-
-  // Step 2: Get the pet by ID
-  const getResponse = getPet(newPet.id, data.authToken);
-  check(getResponse, {
-    'pet retrieved successfully': (r) => r.status === 200,
-  });
-
-  // Step 3: Update the pet information
-  const updatedPet: Pet = generatePetData();
+  // Execute Lifecycle steps (Checks are integrated into the functions)
+  createPet(newPet, data.authToken);
+  getPet(newPet.id, data.authToken);
+  const updatedPet = generatePetData();
   updatedPet.id = newPet.id;
-
-  const updateResponse = updatePet(updatedPet, data.authToken);
-  check(updateResponse, {
-    'pet updated successfully': (r) => r.status === 200,
-  });
-
-  // Step 4: Delete the pet
-  const deleteResponse = deletePet(newPet.id, data.authToken);
-  check(deleteResponse, {
-    'pet deleted successfully': (r) => r.status === 200,
-  });
+  updatePet(updatedPet, data.authToken);
+  deletePet(newPet.id, data.authToken);
 }
 
 export function teardown(data: { authToken: string }): void {
