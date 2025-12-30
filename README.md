@@ -86,9 +86,11 @@ npm run test:api
 - Located in: `frameworks/perf-k6/`
 - Uses Webpack for JS bundles + k6 test runner
 - Setup & Teardown
+- Data Pool from CSV
+- Realistic simulation with think time
 - Include full lifecycle with multiple checks
 - Provide Normal Load, Stress test and Soak test
-- Thresholds validation (http_reqs, http_req_failed, http_req_duration, lifecycle_success rating, ...)
+- SLAs/Thresholds validation (http_reqs, http_req_failed, http_req_duration, lifecycle_success rating, ...)
 - Run on local or Grafana k6
 
 Run tests:
