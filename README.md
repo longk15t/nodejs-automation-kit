@@ -18,12 +18,15 @@ automation-monorepo/
 │
 ├── package.json                     # root workspace manager
 ├── tsconfig.json                    # root TS config
-├── pnpm-workspace.yaml              # monorepo management (pnpm/yarn)
+├── .env.*                           # Environment files
+├── .eslint.config.mts               # ESLint configuration file
+├── .prettierrc                      # Prettier configuration file
 │
 ├── frameworks/
 │   ├── web-playwright/              # Playwright UI automation
 │   ├── api-playwright/              # Playwright API automation
 │   └── mobile-wdio/                 # WebdriverIO (Appium) mobile automation
+│   └── perf-k6/                     # K6 Performance test
 │
 └── shared/                          # reusable code across frameworks
     ├── config/
@@ -35,7 +38,7 @@ automation-monorepo/
 
 ## 🚀 Frameworks Overview
 
-### 1️⃣ Web UI Automation — Playwright
+### Web UI Automation — Playwright
 
 - Located in: `frameworks/web-playwright/`
 - Uses Playwright Test Runner
@@ -54,7 +57,7 @@ npm run test:web
 
 ---
 
-### 2️⃣ API Automation — Playwright APIRequestContext
+### API Automation — Playwright APIRequestContext
 
 - Located in: `frameworks/api-playwright/`
 - No external libraries needed
@@ -71,17 +74,27 @@ npm run test:api
 
 ---
 
-### 3️⃣ Mobile Automation — WebdriverIO + Appium
+### Mobile Automation — WebdriverIO + Appium
 
 - Located in: `frameworks/mobile-wdio/`
 - Uses WebdriverIO test runner
 - Compatible with Android & iOS
 - Includes basic sample mobile test
 
+### Performance Test - k6
+
+- Located in: `frameworks/perf-k6/`
+- Uses Webpack for JS bundles + k6 test runner
+- Setup & Teardown
+- Include full lifecycle with multiple checks
+- Provide Normal Load, Stress test and Soak test
+- Thresholds validation (http_reqs, http_req_failed, http_req_duration, lifecycle_success rating, ...)
+- Run on local or Grafana k6
+
 Run tests:
 
 ```sh
-npm run test:mobile
+npm run load:test:local
 ```
 
 ---
@@ -95,6 +108,7 @@ npm install
 npm install --prefix frameworks/web-playwright
 npm install --prefix frameworks/api-playwright
 npm install --prefix frameworks/mobile-wdio
+npm install --prefix frameworks/perf-k6
 ```
 
 Install Playwright dependencies
@@ -133,6 +147,15 @@ npm test:api
 npm test:mobile
 ```
 
+### Run Performance Tests (k6)
+
+```sh
+npm run load:test:local
+npm run load:test:cloud
+npm run stress:test:local
+npm run soak:test:local
+```
+
 ---
 
 ## 🏗️ Technology Stack
@@ -142,9 +165,10 @@ npm test:mobile
 | Web UI       | Playwright                   |
 | API          | Playwright APIRequestContext |
 | Mobile       | WebdriverIO + Appium         |
+| Performance  | k6                           |
 | Language     | TypeScript                   |
-| Package Mgmt | pnpm / yarn workspaces       |
-| Runner       | Playwright / Mocha (WDIO)    |
+| Package Mgmt | npm                          |
+| Runner       | Playwright, Mocha, Webpack   |
 
 ---
 
@@ -173,6 +197,7 @@ Each framework has its own `tsconfig.json`, extending the root config:
 - `frameworks/web-playwright/tsconfig.json`
 - `frameworks/api-playwright/tsconfig.json`
 - `frameworks/mobile-wdio/tsconfig.json`
+- `frameworks/perf-k6/tsconfig.json`
 
 This ensures clean isolation but shared conventions.
 
@@ -188,7 +213,8 @@ This ensures clean isolation but shared conventions.
 .github/workflows/
   ├── test-web.yml
   ├── test-api.yml
-  └── test-mobile.yml
+  ├── test-mobile.yml
+  ├── test-performance.yml
 ```
 
 ---
@@ -199,8 +225,6 @@ This ensures clean isolation but shared conventions.
 - Add test with **mock data**
 - Add **Dockerized appium service**
 - Add **test data management**
-- Add **environment profiles**
-- Integrate **eslint + prettier**
 - Add **global test coverage** tooling
 - Add **monorepo release management** (nx, turbo)
 

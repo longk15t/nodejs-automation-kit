@@ -13,8 +13,10 @@
     "test:mobile:android": "npm --prefix frameworks/mobile-wdio run test:android",
     "test:mobile:browserstack": "npm --prefix frameworks/mobile-wdio run test:browserstack",
     "test:mobile:ios": "npm --prefix frameworks/mobile-wdio run test:ios",
-    "test:perf:local": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run test:local",
-    "test:perf:cloud": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run test:cloud",
+    "load:test:local": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run load:test:local",
+    "load:test:cloud": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run load:test:cloud",
+    "stress:test:local": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run stress:test:local",
+    "soak:test:local": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run soak:test:local",
     "prepare": "husky"
   },
   "keywords": [],
