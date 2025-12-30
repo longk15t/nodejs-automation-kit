@@ -33,10 +33,13 @@ export const options: Options = {
     { duration: '30s', target: 0 },
   ],
   thresholds: {
+    http_reqs: ['count>1090'],
     http_req_failed: ['rate<0.01'], // Global error rate should be less than 1%
-    http_req_duration: ['p(95)<500'], // 95% of global requests should be below 500ms
+    http_req_duration: ['p(95)<500', 'p(99)<1000'], // 95% of global requests should be below 500ms, 99% of global requests should be below 1000ms
     'http_req_duration{name:CreatePet}': ['p(95)<800'], // Specific SLA for creation
     'http_req_duration{name:DeletePet}': ['p(95)<400'], // Specific SLA for deletion
+    http_req_tls_handshaking: ['p(95)<150'], // TLS handshake should be below 150ms
+    checks: ['rate>0.99'], // Global check rate should be greater than 99%
   },
 };
 

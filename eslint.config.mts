@@ -42,7 +42,7 @@ const config = [
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
-      'no-console': 'error',
+      'no-console': 'off',
       'prefer-const': 'error',
       '@typescript-eslint/no-inferrable-types': 'error',
       '@typescript-eslint/no-empty-function': 'error',
