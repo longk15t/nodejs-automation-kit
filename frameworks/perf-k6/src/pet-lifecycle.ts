@@ -16,6 +16,12 @@ export const options: Options = {
     { duration: '3m', target: 5 }, // Stay at 5 VUs for 3 minutes
     { duration: '1m', target: 0 }, // Ramp down to 0 VUs in 1 minute
   ],
+  thresholds: {
+    http_req_failed: ['rate<0.01'], // Global error rate should be less than 1%
+    http_req_duration: ['p(95)<500'], // 95% of global requests should be below 500ms
+    'http_req_duration{name:CreatePet}': ['p(95)<800'], // Specific SLA for creation
+    'http_req_duration{name:DeletePet}': ['p(95)<400'], // Specific SLA for deletion
+  },
 };
 
 export default function (): void {

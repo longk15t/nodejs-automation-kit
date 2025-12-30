@@ -32,6 +32,12 @@ export const options: Options = {
     { duration: '1m', target: 5 },
     { duration: '30s', target: 0 },
   ],
+  thresholds: {
+    http_req_failed: ['rate<0.01'], // Global error rate should be less than 1%
+    http_req_duration: ['p(95)<500'], // 95% of global requests should be below 500ms
+    'http_req_duration{name:CreatePet}': ['p(95)<800'], // Specific SLA for creation
+    'http_req_duration{name:DeletePet}': ['p(95)<400'], // Specific SLA for deletion
+  },
 };
 
 export default function (): void {

@@ -4,19 +4,25 @@ import { BASE_URL } from '../src/config';
 export function createPet(petData: any): http.RefinedResponse<any> {
   return http.post(`${BASE_URL}/pet`, JSON.stringify(petData), {
     headers: { 'Content-Type': 'application/json' },
+    tags: { name: 'CreatePet' },
   });
 }
 
 export function getPet(petId: number | string): http.RefinedResponse<any> {
-  return http.get(`${BASE_URL}/pet/${petId}`);
+  return http.get(`${BASE_URL}/pet/${petId}`, {
+    tags: { name: 'GetPet' },
+  });
 }
 
 export function updatePet(petData: any): http.RefinedResponse<any> {
   return http.put(`${BASE_URL}/pet`, JSON.stringify(petData), {
     headers: { 'Content-Type': 'application/json' },
+    tags: { name: 'UpdatePet' },
   });
 }
 
 export function deletePet(petId: number | string): http.RefinedResponse<any> {
-  return http.del(`${BASE_URL}/pet/${petId}`);
+  return http.del(`${BASE_URL}/pet/${petId}`, null, {
+    tags: { name: 'DeletePet' },
+  });
 }
