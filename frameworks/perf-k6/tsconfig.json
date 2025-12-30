@@ -17,5 +17,5 @@
         "src/**/*",
         "utils/",
         "requests/"
-    ]
+, "config/config.ts", "config/profiles.ts"    ]
 }

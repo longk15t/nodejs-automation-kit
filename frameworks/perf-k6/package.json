@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "test:local": "k6 run dist/pet-lifecycle.js",
-    "test:cloud": "k6 cloud dist/pet-lifecycle-cloud.js"
+    "load:test:local": "k6 run dist/load-test-lifecycle.js",
+    "load:test:cloud": "k6 cloud dist/load-test-lifecycle-cloud.js",
+    "stress:test:local": "k6 run dist/stress-test-lifecycle.js",
+    "soak:test:local": "k6 run dist/soak-test-lifecycle.js"
   },
   "keywords": [],
   "author": "",

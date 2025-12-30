@@ -1,6 +1,6 @@
 import http, { RefinedResponse } from 'k6/http';
 import { check } from 'k6';
-import { BASE_URL } from '../src/config';
+import { BASE_URL } from '../config/config';
 
 function getHeaders(token?: string): Record<string, string> {
   const headers: Record<string, string> = {
