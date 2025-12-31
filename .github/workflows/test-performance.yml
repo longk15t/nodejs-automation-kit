@@ -61,7 +61,7 @@ jobs:
       - name: Run k6 Performance Test
         uses: grafana/k6-action@v0.3.1
         with:
-          filename: ${{ github.event.inputs.execution_type == 'cloud' && 'frameworks/perf-k6/dist/load-test-lifecycle-cloud.js' || 'frameworks/perf-k6/dist/load-test-lifecycle.js' }}
+          filename: 'frameworks/perf-k6/dist/pet-lifecycle.js'
           cloud: ${{ github.event.inputs.execution_type == 'cloud' }}
           token: ${{ github.event.inputs.execution_type == 'cloud' && secrets.K6_CLOUD_TOKEN || '' }}
           flags: |
@@ -72,6 +72,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: k6-report-${{ github.event.inputs.execution_type }}-${{ github.run_id }}
+          name: k6-report-${{ github.event.inputs.execution_type }}-${{ github.event.inputs.profile_type }}-${{ github.event.inputs.environment }}
           path: reports/*.html
           retention-days: 30
