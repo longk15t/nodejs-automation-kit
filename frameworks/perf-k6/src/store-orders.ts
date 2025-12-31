@@ -1,31 +1,21 @@
 import { sleep } from 'k6';
 import { Options } from 'k6/options';
-import { SharedArray } from 'k6/data';
 import { Rate } from 'k6/metrics';
 import { faker } from '@faker-js/faker';
-import { generatePetData } from '../utils/pet';
-import { createPet, getPet, updatePet, deletePet } from '../requests/pet';
 import { authenticate } from '../requests/auth';
 import * as Profiles from '../config/profiles';
 
-// @ts-expect-error - jslib handles this at runtime
-import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
 // @ts-expect-error - k6-reporter does not have official type definitions
 import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
 // @ts-expect-error - k6-summary does not have official type definitions
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.2/index.js';
+import { generateOrderData } from '../utils/order';
+import { placeOrder, findOrder, deleteOrder } from '../requests/store-order';
 
 /**
  * CUSTOM METRICS
  */
 const lifecycleSuccess = new Rate('lifecycle_success');
-
-/**
- * DATA POOL
- */
-const petPool = new SharedArray('pet pool', function () {
-  return papaparse.parse(open('../data/pets.csv'), { header: true }).data;
-});
 
 /**
  * DYNAMIC OPTIONS CONFIGURATION
@@ -55,7 +45,7 @@ export const options: Options = {
   ext: {
     loadimpact: {
       projectID: 6248577,
-      name: `Pet Lifecycle Performance Test`,
+      name: `Store Order Performance Test`,
       distribution: {
         region: { loadZone: randomRegion[1], percent: 100 },
       },
@@ -65,37 +55,27 @@ export const options: Options = {
 
 export function setup(): { authToken: string } {
   console.log(`[Setup] Running test against environment: ${__ENV.ENVIRONMENT || 'dev'}`);
-  console.log(`[Setup] Starting Pet Lifecycle ${profileName}...`);
+  console.log(`[Setup] Starting Store Order ${profileName}...`);
   const token = authenticate();
   return { authToken: token };
 }
 
 export default function (data: { authToken: string }): void {
-  const poolPet = petPool[Math.floor(Math.random() * petPool.length)] as any;
-  const newPet = generatePetData();
-  newPet.id = parseInt(poolPet.id);
-  newPet.name = poolPet.name;
-  newPet.status = poolPet.status;
-
+  const newOrder = generateOrderData();
   const token = data.authToken;
   let success = true;
 
   try {
-    createPet(newPet, token);
+    placeOrder(newOrder, token);
     sleep(Math.random() * 2 + 1);
 
-    getPet(newPet.id, token);
+    findOrder(newOrder.id, token);
     sleep(Math.random() * 1 + 0.5);
 
-    const updatedPet = generatePetData();
-    updatedPet.id = newPet.id;
-    updatePet(updatedPet, token);
-    sleep(Math.random() * 2 + 1);
-
-    deletePet(newPet.id, token);
+    deleteOrder(newOrder.id, token);
   } catch (e) {
     success = false;
-    console.error(`[Error] Lifecycle failed: ${e}`);
+    console.error(`[Error] Order Lifecycle failed: ${e}`);
   } finally {
     lifecycleSuccess.add(success);
   }
