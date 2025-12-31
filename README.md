@@ -156,6 +156,7 @@ npm run load:test:local
 npm run load:test:cloud
 npm run stress:test:local
 npm run soak:test:local
+npm run spike:test:local
 ```
 
 ---

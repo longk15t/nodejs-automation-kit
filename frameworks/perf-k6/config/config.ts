@@ -7,6 +7,7 @@ const ENV_URLS = {
 
 // Get environment from k6 environment variable, default to 'dev'
 const environment = ((__ENV as Record<string, string>).ENVIRONMENT || 'dev') as keyof typeof ENV_URLS;
+console.log(`[Config] Running tests against the '${environment}' environment.`);
 
 // Export the base URL for the current environment
 export const BASE_URL = ENV_URLS[environment] || ENV_URLS.dev;

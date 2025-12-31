@@ -5,10 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "load:test:local": "k6 run dist/load-test-lifecycle.js",
-    "load:test:cloud": "k6 cloud dist/load-test-lifecycle-cloud.js",
-    "stress:test:local": "k6 run dist/stress-test-lifecycle.js",
-    "soak:test:local": "k6 run dist/soak-test-lifecycle.js"
+    "load:test:local": "k6 run dist/pet-lifecycle.js",
+    "load:test:cloud": "k6 cloud dist/pet-lifecycle.js",
+    "stress:test:local": "k6 run dist/pet-lifecycle.js -e PROFILE=STRESS_TEST",
+    "soak:test:local": "k6 run dist/pet-lifecycle.js -e PROFILE=SOAK_TEST",
+    "spike:test:local": "k6 run dist/pet-lifecycle.js -e PROFILE=SPIKE_TEST",
+    "stress:test:cloud": "k6 cloud dist/pet-lifecycle.js -e PROFILE=STRESS_TEST",
+    "soak:test:cloud": "k6 cloud dist/pet-lifecycle.js -e PROFILE=SOAK_TEST",
+    "spike:test:cloud": "k6 cloud dist/pet-lifecycle.js -e PROFILE=SPIKE_TEST"
   },
   "keywords": [],
   "author": "",

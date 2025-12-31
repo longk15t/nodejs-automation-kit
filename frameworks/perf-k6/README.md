@@ -50,19 +50,30 @@ After building the project, you can run the tests using k6.
 
 -   **Run a specific test**:
     ```bash
-    k6 run dist/find-pet-by-status-200.js
+    k6 run dist/pet-lifecycle.js
     ```
 
 -   **Run a test on a specific environment**:
     ```bash
     # Run on dev environment (default)
-    k6 run dist/find-pet-by-status-200.js
+    k6 run dist/pet-lifecycle.js
 
     # Run on staging environment
-    k6 run -e ENVIRONMENT=staging dist/find-pet-by-status-200.js
+    k6 run -e ENVIRONMENT=staging dist/pet-lifecycle.js
+    ```
+-   **Run a test on a specific profile**:
+    ```bash
+    # Run normal load test (default)
+    k6 run dist/pet-lifecycle.js
 
-    # Run on uat environment
-    k6 run -e ENVIRONMENT=uat dist/find-pet-by-status-200.js
+    # Run stress test
+    k6 run -e PROFILE=STRESS_TEST dist/pet-lifecycle.js
+    ```
+
+-   **Run a test on cloud**:
+    ```bash
+    # Run spike test on uat environment on Grafana k6 Cloud
+    k6 cloud -e PROFILE=SPIKE -e ENVIRONMENT=uat dist/pet-lifecycle.js
     ```
 
     *Note: Ensure you have built the project (`npm run build`) before running the tests.*

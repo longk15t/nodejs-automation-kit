@@ -11,6 +11,16 @@ on:
         options:
           - local
           - cloud
+      profile_type:
+        description: 'Profile type to execute'
+        required: true
+        default: 'AVERAGE_LOAD'
+        type: choice
+        options:
+          - AVERAGE_LOAD
+          - STRESS_TEST
+          - SOAK_TEST
+          - SPIKE_TEST
       environment:
         description: 'Environment to run tests against'
         required: true
@@ -56,6 +66,7 @@ jobs:
           token: ${{ github.event.inputs.execution_type == 'cloud' && secrets.K6_CLOUD_TOKEN || '' }}
           flags: |
             -e ENVIRONMENT=${{ github.event.inputs.environment || 'dev' }}
+            -e PROFILE=${{ github.event.inputs.profile_type || 'AVERAGE_LOAD' }}
 
       - name: Archive k6 Reports
         uses: actions/upload-artifact@v4

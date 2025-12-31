@@ -17,6 +17,7 @@
     "load:test:cloud": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run load:test:cloud",
     "stress:test:local": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run stress:test:local",
     "soak:test:local": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run soak:test:local",
+    "spike:test:local": "npm --prefix frameworks/perf-k6 run build && npm --prefix frameworks/perf-k6 run spike:test:local",
     "prepare": "husky"
   },
   "keywords": [],
