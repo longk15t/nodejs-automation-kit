@@ -1,10 +1,11 @@
-# Automation Monorepo (Playwright Web, Playwright API, WebdriverIO Mobile)
+# Automation Monorepo (Playwright Web, Playwright API, WebdriverIO Mobile, k6 Performance)
 
 This monorepo provides a clean, scalable structure for managing multiple automation frameworks under one repository. It includes:
 
 - **Web UI Automation** — Playwright
 - **API Automation** — Playwright APIRequestContext
 - **Mobile Automation** — WebdriverIO + Appium
+- **Performance Test** — k6
 - **Shared utilities** for cross-framework reuse
 
 Designed for teams who want a unified automation codebase with modular components and individual framework isolation.
@@ -81,6 +82,15 @@ npm run test:api
 - Compatible with Android & iOS
 - Includes basic sample mobile test
 
+Run tests:
+
+```sh
+npm run test:mobile:android
+npm run test:mobile:ios
+```
+
+---
+
 ### Performance Test - k6
 
 - Located in: `frameworks/perf-k6/`
@@ -103,7 +113,7 @@ npm run load:test:local
 
 ## 📦 Installation
 
-### 1. Install dependencies (root + all workspaces):
+### Install dependencies (root + all workspaces):
 
 ```sh
 npm install
@@ -113,7 +123,7 @@ npm install --prefix frameworks/mobile-wdio
 npm install --prefix frameworks/perf-k6
 ```
 
-Install Playwright dependencies
+### Install Playwright dependencies
 
 ```sh
 cd frameworks/web-playwright
