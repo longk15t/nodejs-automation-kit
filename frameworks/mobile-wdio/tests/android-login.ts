@@ -14,7 +14,7 @@ describe('My Login Demo on Android device', () => {
     await expect(LoginScreen.errorMessage).toHaveText('Provided credentials do not match any user in this service.');
   });
 
-  it('should login with invalid credentials', async () => {
+  it('should login with valid credentials', async () => {
     await LoginScreen.enterCredentials('bob@example.com', '10203040');
     await LoginScreen.clickLogin();
     await driver.pause(3000);
