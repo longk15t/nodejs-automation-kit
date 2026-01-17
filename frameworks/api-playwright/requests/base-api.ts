@@ -1,5 +1,5 @@
 import { APIRequestContext, APIResponse } from '@shared/fixtures/fixture';
-import { logger } from '@shared/utils/logger';
+import logger from '@shared/utils/logger';
 
 export class BaseApi {
   public requestContext: APIRequestContext;

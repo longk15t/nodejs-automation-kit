@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { APIRequestContext, test as base, type APIResponse, type TestInfo } from '@playwright/test';
 import { PetApi } from '../../frameworks/api-playwright/requests/pet-api';
 import { ProductsApi } from '../../frameworks/api-playwright/requests/products-api';
 import { PostsApi } from '../../frameworks/api-playwright/requests/posts-api';
-import { logger } from '@shared/utils/logger';
+import logger from '@shared/utils/logger';
 
 // ============= TYPES =============
 type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete' | 'head';

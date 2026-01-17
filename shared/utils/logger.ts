@@ -1,18 +1,41 @@
-/* eslint-disable no-console */
-import { loggerConfig } from '@shared/config/logger.config';
+import winston from 'winston';
+import path from 'path';
+import moment from 'moment-timezone';
 
-export class Logger {
-  info(message: string, ...args: unknown[]): void {
-    if (loggerConfig.enabled) console.log(`[INFO] ${message}`, ...args);
-  }
+const currentDir = __dirname;
+// Go one level above (back to 'src')
+const srcDir = path.resolve(currentDir, '..');
 
-  warn(message: string, ...args: unknown[]): void {
-    if (loggerConfig.enabled) console.warn(`[WARN] ${message}`, ...args);
-  }
+// Change to 'logging' folder
+const loggingDir = path.resolve(srcDir, 'logging');
 
-  error(message: string, ...args: unknown[]): void {
-    if (loggerConfig.enabled) console.error(`[ERROR] ${message}`, ...args);
-  }
-}
+// Function to format log entries with timestamp and timezone
+const customFormat = winston.format.printf(({ level, message, timestamp }) => {
+  return `${timestamp} [${level}]: ${message}`;
+});
 
-export const logger = new Logger();
+const timeZone = 'Australia/Melbourne';
+
+const logger = winston.createLogger({
+  format: winston.format.combine(
+    winston.format.timestamp({ format: () => moment().tz(timeZone).format() }),
+    customFormat,
+  ),
+  transports: [
+    new winston.transports.Console({ level: 'debug' }),
+    new winston.transports.File({
+      filename: path.join(loggingDir, 'test_run.log'),
+      maxFiles: 5, // Number of log files to retain
+      maxsize: 300 * 1024, // 10 * 1024 ==10 KB, specify the size in bytes
+      level: 'info',
+    }),
+    new winston.transports.File({
+      filename: path.join(loggingDir, 'test_error.log'),
+      maxFiles: 5, // Number of log files to retain
+      maxsize: 10 * 1024, // 10 KB, specify the size in bytes
+      level: 'error',
+    }),
+  ],
+});
+
+export default logger;

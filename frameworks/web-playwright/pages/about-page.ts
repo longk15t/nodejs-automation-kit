@@ -1,6 +1,6 @@
 import { Page, Locator } from '@shared/fixtures/fixture';
 import { BasePage } from './base-page';
-import { logger } from '@shared/utils/logger';
+import logger from '@shared/utils/logger';
 import { env } from '@shared/config/env';
 
 export class AboutPage extends BasePage {

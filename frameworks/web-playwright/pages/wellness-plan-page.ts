@@ -1,7 +1,7 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './base-page';
 import { env } from '@shared/config/env';
-import { logger } from '@shared/utils/logger';
+import logger from '@shared/utils/logger';
 
 export class WellnessPlanPage extends BasePage {
   readonly joinPlanButton: Locator;

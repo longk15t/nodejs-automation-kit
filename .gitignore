@@ -7,3 +7,4 @@ allure-report
 
 **/reports
 **/dist
+shared/logging
