@@ -16,7 +16,7 @@ test.describe('CMS Content Validation', () => {
     expect.soft(color).toContain(wellnessContent.mainHeading.color);
 
     for (const menuText of wellnessContent.membershipItems) {
-      await expect.soft(wellnessPlanPage.page.getByRole('heading', { name: menuText })).toBeVisible();
+      await expect.soft(wellnessPlanPage.page.getByRole('heading', { name: menuText })).toBeVisible({ timeout: 5000 });
     }
   });
 });

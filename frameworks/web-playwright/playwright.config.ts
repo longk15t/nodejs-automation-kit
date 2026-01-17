@@ -1,8 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
 import { env } from '@shared/config/env';
-import * as path from 'path';
-
-const smartReportOutput = path.join(__dirname, 'test-results', 'smart-report.html');
 
 const isCI = !!process.env.CI;
 const isHeadless = !process.argv.includes('--headed');
@@ -17,7 +14,6 @@ export default defineConfig({
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
     ['json', { outputFile: 'test-results/results.json' }],
     ['junit', { outputFile: 'test-results/results.xml' }],
-    ['playwright-smart-reporter', { outputFile: smartReportOutput }],
   ],
   use: {
     baseURL: env.baseUrl,

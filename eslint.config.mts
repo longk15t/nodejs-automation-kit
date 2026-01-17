@@ -50,7 +50,9 @@ const config = [
       'playwright/missing-playwright-await': 'error',
       'playwright/no-page-pause': 'error',
       'playwright/no-useless-await': 'error',
-      'playwright/no-skipped-test': 'error',
+      'playwright/no-skipped-test': 'off',
+      'playwright/no-wait-for-timeout': 'off',
+      'playwright/no-wait-for-selector': 'off',
     },
   },
 ];

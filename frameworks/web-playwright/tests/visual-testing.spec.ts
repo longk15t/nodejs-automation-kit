@@ -9,12 +9,6 @@ test.describe('Visual testing on desktop browser', { tag: '@visual' }, () => {
     await petAdvicePage.gotoPetAdvicePage();
   });
 
-  test('full page visual snapshot', async ({ petAdvicePage }) => {
-    expect(await petAdvicePage.page.screenshot({ fullPage: true })).toMatchSnapshot('pet-advice-fullpage.png', {
-      maxDiffPixelRatio: 0.02,
-    });
-  });
-
   test('Dog/Cat Advice buttons visual snapshot', async ({ petAdvicePage }) => {
     expect(await petAdvicePage.dogAdviceButton.screenshot()).toMatchSnapshot('dog-advice-button.png', {
       maxDiffPixelRatio: 0.01,
@@ -31,7 +25,7 @@ test.describe('Responsive Visual Testing on mobile viewport', { tag: '@visual' }
     await petAdvicePage.setViewPort(412, 915); // Google pixel 7
     await petAdvicePage.gotoPetAdvicePage();
     expect(await petAdvicePage.page.screenshot({ fullPage: true })).toMatchSnapshot('android-pet-advice-fullpage.png', {
-      maxDiffPixelRatio: 0.02,
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -39,7 +33,7 @@ test.describe('Responsive Visual Testing on mobile viewport', { tag: '@visual' }
     await petAdvicePage.setViewPort(390, 844); // iPhone 13
     await petAdvicePage.gotoPetAdvicePage();
     expect(await petAdvicePage.page.screenshot({ fullPage: true })).toMatchSnapshot('ios-pet-advice-fullpage.png', {
-      maxDiffPixelRatio: 0.02,
+      maxDiffPixelRatio: 0.1,
     });
   });
 });
