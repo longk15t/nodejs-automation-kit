@@ -9,10 +9,10 @@ const prettierConfig = {
   tabWidth: 2,
   useTabs: false,
   printWidth: 120,
-  trailingComma: "all",
-  arrowParens: "always",
-  endOfLine: "auto",
-  bracketSpacing: true
+  trailingComma: 'all',
+  arrowParens: 'always',
+  endOfLine: 'auto',
+  bracketSpacing: true,
 };
 
 const config = [
@@ -48,7 +48,7 @@ const config = [
       '@typescript-eslint/no-empty-function': 'error',
       '@typescript-eslint/no-floating-promises': 'error',
       'playwright/missing-playwright-await': 'error',
-      'playwright/no-page-pause': 'error',
+      'playwright/no-page-pause': 'off',
       'playwright/no-useless-await': 'error',
       'playwright/no-skipped-test': 'off',
       'playwright/no-wait-for-timeout': 'off',

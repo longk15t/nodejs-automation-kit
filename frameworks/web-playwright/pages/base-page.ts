@@ -9,6 +9,10 @@ export class BasePage {
     this.page = page;
   }
 
+  getPage(): Page {
+    return this.page;
+  }
+
   async navigateTo(url: string): Promise<void> {
     await this.page.goto(url);
     await this.waitForPageLoad();
@@ -198,10 +202,6 @@ export class BasePage {
   async reloadPage(): Promise<void> {
     await this.page.reload();
     await this.waitForPageLoaded();
-  }
-
-  async changeLanguage(language: string): Promise<void> {
-    await this.navigateTo(this.page.url().replace('en', language));
   }
 
   async waitForUrlToBe(expectedUrl: string, timeoutValue = 180): Promise<void> {
